@@ -111,8 +111,9 @@
          * If machine is running, perform a step and return true
          * Otherwise, return false
          *
-         * Throws TM.RuntimeError
-         * // TODO: list RuntimeError types
+         * Throws 
+         * - TM.NoSuchCommandError
+         * - TM.OutOfTapeError
          */
         this.step = function() {
             if(!isRunning) {
