@@ -1,0 +1,18 @@
+* { margin: 0; padding: 0; }
+HTML { height: 100%; background-color: #FFF; }
+BODY { height: 100%; padding: 3pt; }
+
+P {
+    margin-top: 15pt;
+    margin-bottom: 5pt;
+}
+H1 {
+    text-align: center;
+    font-size: 20pt;
+    margin-top: 10pt;
+}
+H2 {
+    margin-top: 20pt;
+    font-size: 14pt;
+    font-weight: bold;
+}
