@@ -1,0 +1,87 @@
+﻿/*
+ * Условия лицензионного соглашения см. в файле jstu4.license
+ */
+* {
+    margin: 0;
+    padding: 0;
+}
+body {
+    overflow: scroll;
+}
+div.block , p {
+    margin-top: 15pt;
+    margin-bottom: 5pt;
+}
+#container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 15pt;
+}
+h1 {
+    text-align: center;
+    font-size: 20pt;
+    margin-top: 10pt;
+}
+h2 {
+    margin-top: 20pt;
+    font-size: 14pt;
+    font-weight: bold;
+}
+#controls {
+    float: right;
+}
+a.button {
+    text-decoration: none;
+    padding: 1pt 3pt;
+    color: black;
+    background: #EEE;
+    margin-left: 15pt;
+}
+a.button:hover {
+    background: #DDD;
+}
+.tape {
+    width: 100%;
+    height: 13pt;
+}
+.program {
+    width: 100%;
+    height: 500px;
+}
+#div-tape,
+#div-program,
+#txt-tape,
+#txt-program {
+    border: 1px solid #AAA;
+    font-family: monospace;
+    font-size: 11pt;
+    padding: 2px;
+}
+.program-text {
+    font-family: monospace;
+    font-size: 11pt;
+}
+.run {
+    display: none;
+}
+.active {
+    background: #8F8;
+    padding: 0.5pt 0.5pt;
+    margin: -0.5pt -0.5pt;
+}
+.visited {
+    font-weight: bold;
+    color: #600;
+}
+#info {
+    color: #090;
+}
+#error {
+    color: #D00;
+}
+#div-help  {
+    display: none;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 15pt;
+}

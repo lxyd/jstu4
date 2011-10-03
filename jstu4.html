@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>Машина Тьюринга</title>
+        <script type="text/javascript" src="right-src.js"></script>
+        <script type="text/javascript" src="jstu4.js"></script>
+        <link rel="stylesheet" type="text/css" href="jstu4.css"/>
+    </head>
+    <body>
+        <h1>
+            Эмулятор машины Тьюринга в четвёрках v1.1
+            <a id="btn-help" class="button" tabindex="-1" href="javascript:void(0);">?</a>
+        </h1>
+
+        <div id="div-help">
+            <h2>О программе</h2>
+            <p>
+                Данное учебное пособие предназначено для изучения алгоритмической модели "Машина Тьюринга".
+                Приложение представляет собой интерпретатор команд МТ в четвёрках.
+            </p>
+            <p>
+                Версия v1.1 соответсвует стандартам xhtml 1.1 и css 2.1 и функционирует
+                в большинстве современных браузеров. В разработке использовалась библиотека
+                <a href="http://rightjs.org">RightJS</a>
+            </p>
+            <p>
+                &copy; Алексей Дубинин<br/>
+                Условия лицензионного соглашеия (лицензия MIT) см. в файле <a href="jstu4.license">jstu4.license</a>
+            </p>
+
+            <hr/>
+
+            <h2>Справка</h2>
+            <p>
+                Формат команды: q,a,v,q'<br/>
+                q - текущее состояние;<br/>
+                a - знак, который видим на ленте;<br/>
+                v - знак, который пишем или команда;<br/>
+                q' - состояние, в которое переходим.<br/>
+            </p>
+
+            <p>
+                Возможные команды МТ:<br/>
+                &gt; - движение головки вправо;<br/>
+                &lt; - движение головки влево;<br/>
+                = - отсутствие движения на данном такте;<br/>
+                # - полная остановка машины.<br/>
+            </p>
+
+            <p>Можно записывать несколько команд в строку, разделяя их одним или несколькими пробелами.</p>
+            <p>Поддерживаются именованные состояния, но имена состояний, состоящие из одних цифр, считаются целыми числами (т.е. 01 и 1 - это одно и то же). Начальное состояние должно иметь имя 0.</p>
+
+            <p>
+                Команды интерпретатора:<br/>
+                "Запустить" - разбирает программу и запускает её на выполнение (также можно нажать Enter в поле ввода ленты или Ctrl+Enter в поле ввод программы);<br/>
+                "Быстро" - запустить программу в быстром, автоматическом режиме (также можно ещё раз нажать Enter);<br/>
+                "Шаг" - выйти из быстрого режима (если запущен) и выполнить следующий шаг (Пробел);<br/>
+                "Закончить" - вернуться к редактированию программы и ленты (клик на программе или ленте или Ctrl+C).<br/>
+            </p>
+
+            <p>Пример (ненормированная замена 0 на 1 и наоборот):</p>
+            <p class="program-text">
+                00,&nbsp;,&lt;,rep<br/>
+                rep,0,1,mov&nbsp;&nbsp;rep,1,0,mov&nbsp;&nbsp;rep,&nbsp;,&gt;,fin<br/>
+                mov,0,&lt;,rep&nbsp;&nbsp;mov,1,&lt;,rep<br/>
+                fin,0,&gt;,fin&nbsp;&nbsp;fin,1,&gt;,fin&nbsp;&nbsp;fin,&nbsp;,#,fin
+            </p>
+        </div>
+        <div id="container">
+            <div class="block">
+                <input id="txt-tape" class="edit tape" type="text" value="Лента"/>
+                <div id="div-tape" class="run tape"></div>
+            </div>
+            <div class="block">
+                <div id="controls">
+                    <a id="btn-totu4"  class="button edit" tabindex="-1" href="javascript:void(0);" title="Привести к формату tu4, заново пронумеровав состояния">В формат tu4</a>
+                    <a id="btn-run"  class="button edit" tabindex="-1" href="javascript:void(0);">Запустить</a>
+                    <a id="btn-uncheck" class="button run"  tabindex="-1" href="javascript:void(0);">Снять пометки</a>
+                    <a id="btn-stop" class="button run"  tabindex="-1" href="javascript:void(0);">Закончить</a>
+                    <a id="btn-fast" class="button run"  tabindex="-1" href="javascript:void(0);">Быстро</a>
+                    <a id="btn-step" class="button run"  tabindex="-1" href="javascript:void(0);">Шаг</a>
+                </div>
+                <span id="info"></span>
+                <span id="error"></span>
+                <br/>
+                <textarea id="txt-program" class="edit program" rows="" cols="">Программа</textarea>
+                <div id="div-program" class="run program"></div>
+            </div>
+        </div>
+    </body>
+</html>
