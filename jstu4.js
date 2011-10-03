@@ -286,7 +286,7 @@ var stepTM = function() {
 var fastTM = function() {
     // запускаем быстрое выполнение только если оно пока не идёт
     if(tmTimer === null) {
-        tmTimer = function() { doStepTM(); }.periodical(100);
+        tmTimer = function() { doStepTM(); }.periodical(20);
     }
 };
 var stopTM = function() {
