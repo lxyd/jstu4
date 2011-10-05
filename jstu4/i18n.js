@@ -1,3 +1,4 @@
+// loading locales as files failed because of chromium's policy :(
 var i18n = {};
 
 /**
@@ -17,55 +18,72 @@ var i18n = {};
  */
 
 i18n['en'] = (function() {
-	var t = { lang: 'en' };
+	var t = { lang: 'en', texts: {}, templates: {}, ui: {} };
 
-	t['text/title'] = 'Turing machine emulator, v{{version}}';
-	t['text/program'] = 'Program';
-	t['text/tape'] = 'Tape';
+	t.texts['program'] = 'Program';
+	t.texts['tape'] = 'Tape';
 
-	t['button/help'] = 'Help';
-	t['button/start'] = 'Start';
-	t['button/step'] = 'Step';
-	t['button/quick'] = 'Quick';
-	t['button/finish'] = 'Finish';
+	t.ui['#btn-help'] = '?';
+	t.ui['#btn-help@title'] = 'Help';
+	t.ui['#btn-start'] = 'Start';
+	t.ui['#btn-start@title'] = 'Begin program execution';
+	t.ui['#btn-step'] = 'Step';
+	t.ui['#btn-step@title'] = 'Perform the next step';
+	t.ui['#btn-quick'] = 'Quick';
+	t.ui['#btn-quick@title'] = 'Enter quick execution mode';
+	t.ui['#btn-edit'] = 'Edit';
+	t.ui['#btn-edit@title'] = 'Return to the "edit" mode';
+    t.ui['#btn-totu4'] = 'To TU4';
+    t.ui['#btn-totu4@title'] = 'Convert to TU4 format';
+    t.ui['#btn-unmark'] = 'Unmark';
+    t.ui['#btn-unmark@title'] = 'Unmark visited commands';
 
-	t['error/parseError'] = 'Couldn\'t parse {{text}} ...';
-	t['error/ambiguosTransition'] = 'Ambiguos transition for state "{{q}}" and symbol "{{a}}"';
-	t['error/targetStateDoesNotExist'] = 'Target state "{{w}}" does not exist';
-	t['error/initialStateDoesNotExist'] = 'Initial state "{{q}}" does not exist';
-	t['error/headIsOutOfTape'] = 'Head is out of tape';
-    //t['error/stateNotExist'] = 'State "{{q}}" does not exist';
-	t['error/noSuchTransition'] = 'Transition is undefined for state "{{q}}" and symbol "{{a}}"';
+	t.templates['title'] = 'Turing machine emulator, v{{version}}';
 
-	t['info/finished'] = 'The machine has successfully finished it\'s work';
+	t.templates['error/parseError'] = 'Couldn\'t parse {{text}} ...';
+	t.templates['error/ambiguosTransition'] = 'Ambiguos transition for state "{{q}}" and symbol "{{a}}"';
+	t.templates['error/targetStateDoesNotExist'] = 'Target state "{{w}}" does not exist';
+	t.templates['error/initialStateDoesNotExist'] = 'Initial state "{{q}}" does not exist';
+	t.templates['error/headIsOutOfTape'] = 'Head is out of tape';
+	t.templates['error/noSuchTransition'] = 'Transition is undefined for state "{{q}}" and symbol "{{a}}"';
+
+	t.templates['info/finished'] = 'The machine has successfully finished it\'s work';
 
 	return t;
 })();
 
 i18n['ru'] = (function() {
-	var t = { lang: 'ru' };
+	var t = { lang: 'ru', texts: {}, templates: {}, ui: {}  };
 
-	t['text/title'] = 'Эмулятор машины Тьюринга в четвёрках, v{{version}}';
-	t['text/program'] = 'Программа';
-	t['text/tape'] = 'Лента';
+	t.texts['program'] = 'Программа';
+	t.texts['tape'] = 'Лента';
 
-	t['button/help'] = 'Справка';
-	t['button/start'] = 'Запуск';
-	t['button/step'] = 'Шаг';
-	t['button/quick'] = 'Быстро';
-	t['button/finish'] = 'Закончить';
+	t.ui['#btn-help'] = '?';
+	t.ui['#btn-help@title'] = 'Справка';
+	t.ui['#btn-start'] = 'Старт';
+	t.ui['#btn-start@title'] = 'Запустить программу на выполнение';
+	t.ui['#btn-step'] = 'Шаг';
+	t.ui['#btn-step@title'] = 'Выполнить слещующий шаг программы';
+	t.ui['#btn-quick'] = 'Быстро';
+	t.ui['#btn-quick@title'] = 'Перейти в режим быстрого выполнения';
+	t.ui['#btn-edit'] = 'Править';
+	t.ui['#btn-edit@title'] = 'Вернуться в режим редактирования программы';
+    t.ui['#btn-totu4'] = 'В формат TU4';
+    t.ui['#btn-totu4@title'] = 'Преобразовать программу в формат TU4';
+    t.ui['#btn-unmark'] = 'Сбросить метки';
+    t.ui['#btn-unmark@title'] = 'Сбросить метки с использованных команд';
 
-	t['error/parseError'] = 'Ошибка разбора: {{text}} ...';
-	t['error/ambiguosTransition'] = 'Неоднозначный переход для состояния "{{q}}" и символа "{{a}}"';
-	t['error/targetStateDoesNotExist'] = 'Целевое состояние "{{w}}" не существует';
-	t['error/initialStateDoesNotExist'] = 'Начальное состояние "{{q}}" не существует';
-	t['error/headIsOutOfTape'] = 'Выход за границу ленты';
-	//t['error/stateNotExist'] = 'Состояние "{{q}}" не существует';
-	t['error/noSuchTransition'] = 'Не определён переход для состояния "{{q}}" и символа "{{a}}"';
+	t.templates['title'] = 'Эмулятор машины Тьюринга в четвёрках, v{{version}}';
 
-	t['info/finished'] = 'Машина успешно завершила работу';
+	t.templates['error/parseError'] = 'Ошибка разбора: {{text}} ...';
+	t.templates['error/ambiguosTransition'] = 'Неоднозначный переход для состояния "{{q}}" и символа "{{a}}"';
+	t.templates['error/targetStateDoesNotExist'] = 'Целевое состояние "{{w}}" не существует';
+	t.templates['error/initialStateDoesNotExist'] = 'Начальное состояние "{{q}}" не существует';
+	t.templates['error/headIsOutOfTape'] = 'Выход за границу ленты';
+	t.templates['error/noSuchTransition'] = 'Не определён переход для состояния "{{q}}" и символа "{{a}}"';
+
+	t.templates['info/finished'] = 'Машина успешно завершила работу';
 
 	return t;
 })();
 
-// TODO: add another locales here

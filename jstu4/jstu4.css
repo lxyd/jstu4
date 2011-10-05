@@ -1,21 +1,100 @@
 ﻿* { margin: 0; padding: 0; }
-HTML { height: 100%; background-color: #FFF; }
-BODY { max-width: 800px; height: 100%; margin: 0 auto; }
+HTML { height: 100%; }
+BODY { height: 100%; overflow: hidden; background-color: #FFF; }
 
-.edit {
-	padding: 3pt;
-	border: 1px solid #EEE;
-	background-color: #F8F8F8;
-	font-family: monospace;
-	font-size: 10pt;
+.wrapper {
+    padding: 5pt;
+    height: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+.wide-block {
+    width: 100%;
+    padding: 4px;
+    border: 1px solid #EEE;
+    background-color: #FAFAFA;
+    font-family: monospace;
+    font-size: 10pt;
+
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+}
+
+TEXTAREA.program {
+    resize: none;
 }
 
 .program {
-	min-height: 200px;
+    overflow-y: auto;
 }
 
-.tape {
-	height: 10pt /* .edit { font-size } */;
-	white-space: nowrap;
-	overflow-x: hidden;
+.controls {
+    white-space: nowrap;
+    padding: 5pt 0;
+    height: 18pt;
+}
+
+.controls .log {
+    line-height: 20pt;
+    padding: 0;
+    margin: 0;
+}
+
+.controls .button {
+    float: right;
+    margin-left: 5pt;
+}
+
+A.button {
+    padding: 2px 4px;
+    border: 1px solid #EEE;
+    background-color: #EAEAEA;
+    text-decoration: none;
+    font-size: 10pt;
+    font-family: sans-serif;
+    color: #666;
+    line-height: 14pt;
+}
+A.button:hover {
+    background-color: #E0E0E0;
+}
+
+.placeholder-active {
+    color: #BBB;
+}
+
+H1 {
+    font-weight: normal;
+    margin: 7pt 0 10pt 0;
+    font-size: 18pt;
+    text-align: center; 
+}
+
+H1 .button {
+    line-height: inherit;
+    font-size: inherit;
+    margin-left: 12pt;
+}
+
+#display-tape .current, 
+#display-program .current {
+    padding: 1px;
+    margin: -1px;
+    background-color: #9F7;
+}
+
+#display-program .visited {
+    color: #600;
+}
+
+.error {
+    background-color: #F99;
 }

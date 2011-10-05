@@ -149,30 +149,30 @@
     }
     
     /** Generic runtime error */
-    TM.RuntimeError = function(errData) { this.errData = errData }
+    TM.RuntimeError = function(data) { this.data = data }
 
     /** Head moved at the position -1 */
-    TM.OutOfTapeError = function(errData) { this.errData = errData }
+    TM.OutOfTapeError = function(data) { this.data = data }
     /** There is not a command for state 'q' and symbol 'a' */
-    TM.NoSuchCommandError = function(errData) { this.errData = errData }
+    TM.NoSuchCommandError = function(data) { this.data = data }
 
     TM.OutOfTapeError.prototype = 
         TM.NoSuchCommandError.prototype = 
         new TM.RuntimeError();
     
     /** Generic compile error */
-    TM.CompileError = function(errData) { this.errData = errData }
+    TM.CompileError = function(data) { this.data = data }
 
     /** Text couldn't be parsed as a command */
-    TM.CouldntParseError = function(errData) { this.errData = errData }
+    TM.CouldntParseError = function(data) { this.data = data }
     /** Program is empty (so even initial state cannot be defined) */
-    TM.EmptyProgramError = function(errData) { this.errData = errData }
+    TM.EmptyProgramError = function(data) { this.data = data }
     /** There are two or more commands with identical 'q' and 'a' */
-    TM.AmbiguosCommandError = function(errData) { this.errData = errData }
+    TM.AmbiguosCommandError = function(data) { this.data = data }
     /** State referenced as a target state does not exist */
-    TM.NonexistentTargetState = function(errData) { this.errData = errData }
+    TM.NonexistentTargetState = function(data) { this.data = data }
     /** State referenced as the initial state does not exist */
-    TM.NonexistentInitialState = function(errData) { this.errData = errData }
+    TM.NonexistentInitialState = function(data) { this.data = data }
 
     TM.CouldntParseError.ptototype = 
         TM.EmptyProgramError.prototype = 
@@ -269,13 +269,13 @@
             }
             
             cmd = new TM.Command(parseStateName(arr[1]) /* q */,
-                                arr[2] /* a */,
-                                arr[3] /* v */,
-                                parseStateName(arr[4]) /* w */,
-                                {
-                                    'src': arr[0],
-                                    'offset': pos
-                                } /* data */);
+                                 arr[2] /* a */,
+                                 arr[3] /* v */,
+                                 parseStateName(arr[4]) /* w */,
+                                 {
+                                     'src': arr[0],
+                                     'offset': pos
+                                 } /* data */);
             
             pos += arr[0].length;
             text = text.substring(arr[0].length);
