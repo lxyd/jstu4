@@ -1,0 +1,89 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title>Turing Machine emulator</title>
+		<link rel="stylesheet" href="help.css"/>
+	</head>
+	<body>
+        <div class="wrapper">
+            <p>
+                <a href="#" onclick="history.back(); return false;">&larr; Back to program</a>
+            </p>
+
+            <h1>Turing Machine emulator</h1>
+
+            <h2>About</h2>
+            <p>
+                TODO: what is this program created for
+            </p>
+            <p>
+                &copy; Alexey Dubinin<br/>
+                This software is distributed under the terms of the MIT License. See <a href="COPYING-EN">COPYING</a> for details
+            </p>
+            
+            <p>
+                The following third-party components are included:
+            </p>
+            <ul>
+                <li><a href="http://jquery.com">jQuery</a> - javascript-framework;</li>
+                <li><a href="https://github.com/lxyd/HotMilk">Hotmilk</a> - template organizer which is a wrapper for the <a href="https://github.com/pvande/Milk">Milk</a> template engine.</li>
+            </ul>
+
+            <hr/>
+
+            <h2>Help</h2>
+            <p>
+                Command format: q,a,v,q'<br/>
+                q - current state;<br/>
+                a - symbol currently seen on a tape;<br/>
+                v - command or symbol to write;<br/>
+                q' - new state.<br/>
+            </p>
+
+            <p>
+                Available commands:<br/>
+                &gt; - move right;<br/>
+                &lt; - move left;<br/>
+                = - don't move this time;<br/>
+                # - stop the machine.<br/>
+            </p>
+
+            <p>TODO: translate</p>
+            <p>Можно записывать несколько команд в строку, разделяя их одним или несколькими пробелами.</p>
+            <p>Поддерживаются именованные состояния, но имена состояний, состоящие из одних цифр, считаются целыми числами (т.е. 01 и 1 - это одно и то же). Начальное состояние должно иметь имя 0.</p>
+            
+            <p>В процессе работы выполненые команды помечаются цветом. Сбросить пометки можно в любой момент нажав кнопку "Сбросить метки"</p>
+            
+            <p>Лента ограничена слева, умолчального пробельного символа не предполагается, старайтесь не забывать его ставить</p>
+
+            <p>Команды эмулятора:</p>
+            <ul>
+                <li>"Старт" - разбирает программу и запускает её на выполнение;</li>
+                <li>"Быстро" - запустить программу в быстром, автоматическом режиме;</li>
+                <li>"Шаг" - выполнить следующий шаг, при необходимости выйдя из быстрого режима;</li>
+                <li>"Вернуться к правке" - вернуться к редактированию программы и ленты;</li>
+                <li>"В формат TU4" - преобразовать программу в формат эмулятора tu4 (все имена состояний заменить на шестнадцатеричные числа 0x00&nbsp;-&nbsp;0xFF).</li>
+            </ul>
+            
+            <p>Горячие клавиши:</p>
+            <ul>
+                <li>Ctrl+Enter в режиме правки - запуск программы на выполнение (также можно просто нажать Enter, если в данный момент в фокусе находится поле ввода ленты);</li>
+                <li>Enter или Ctrl+Enter в режиме выполнения - включить/выключить быстрый режим;</li>
+                <li>Пробел в режиме выполнения - выполнить один шаг, при необходимости выйдя из быстрого режима;</li>
+                <li>Esc в режиме выполнения - вернуться к редактированию программы и ленты;</li>
+            </ul>
+
+            <p>Пример (ненормированная замена 0 на 1 и наоборот):</p>
+            <code>
+                00,&nbsp;,&lt;,rep<br/>
+                rep,0,1,mov&nbsp;&nbsp;rep,1,0,mov&nbsp;&nbsp;rep,&nbsp;,&gt;,fin<br/>
+                mov,0,&lt;,rep&nbsp;&nbsp;mov,1,&lt;,rep<br/>
+                fin,0,&gt;,fin&nbsp;&nbsp;fin,1,&gt;,fin&nbsp;&nbsp;fin,&nbsp;,#,fin
+            </code>
+            
+            <p>
+                <a href="#" onclick="history.back(); return false;">&larr; Back to program</a>
+            </p>
+        </div>
+	</body>
+</html>

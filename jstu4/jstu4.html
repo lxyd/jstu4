@@ -1,0 +1,31 @@
+﻿<!DOCTYPE html>
+<html>
+	<head>
+		<title></title>
+        <link rel="stylesheet" href="jstu4.css"/>
+        <script src="jquery-1.6.4.js"></script>
+        <script src="jquery-plugins.js"></script>
+        <script src="hotmilk.browser.jquery.js"></script>
+        <script src="i18n.js"></script>
+		<script src="tu4.js"></script>
+        <script src="ui.js"></script>
+	</head>
+	<body>
+        <div class="wrapper">
+            <h1><span class="title"></span> <a class="button" id="btn-help" href="#"></a></h1>
+            <input class="wide-block mode-edit mode-error tape" id="input-tape" tabindex="1"/>
+            <div class="wide-block mode-run tape" id="display-tape"></div>
+            <div class="controls">
+                <a class="button mode-edit" id="btn-start" href="#"></a>
+                <a class="button mode-edit" id="btn-totu4" href="#"></a>
+                <a class="button mode-run" id="btn-step" href="#"></a>
+                <a class="button mode-run" id="btn-quick" href="#"></a>
+                <a class="button mode-run mode-error" id="btn-edit" href="#"></a>
+                <a class="button mode-run" id="btn-unmark" href="#"></a>
+                <span id="log"></span>
+            </div>
+            <textarea class="wide-block mode-edit program" id="input-program" tabindex="2"></textarea>
+            <div class="wide-block mode-run mode-error program" id="display-program"></div>
+        </div>
+	</body>
+</html>

@@ -1,0 +1,18 @@
+text/title=Turing machine emulator, v{{version}}
+text/program=Program
+text/tape=Tape
+
+button/help=Help
+button/start=Start
+button/step=Step
+button/quick=Quick
+button/finish=Finish
+
+error/parseError=Couldn\'t parse {{text}} ...
+error/ambiguosTransition=Ambiguos transition for state "{{q}}" and symbol "{{a}}"
+error/targetStateDoesNotExist=Target state "{{w}}" does not exist
+error/initialStateDoesNotExist=Initial state "{{q}}" does not exist
+error/headIsOutOfTape=Head is out of tape
+error/noSuchTransition=Transition is undefined for state "{{q}}" and symbol "{{a}}"
+
+info/finished=The machine has successfully finished it\'s work
