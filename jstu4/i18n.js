@@ -6,15 +6,7 @@ var i18n = {};
  * - version - application version
  * - lang  - current language
  *
- * And a command context (could be undefined):
- * - src - command source code
- * - q - current state
- * - a - current symbol on tape
- * - v - command or symbol to write
- * - w - new state
- *
- * Parse errors are also provided with:
- * - text - data that caused the error
+ * And a message-specific context (could be undefined)
  */
 
 i18n['en'] = (function() {
@@ -31,7 +23,7 @@ i18n['en'] = (function() {
 	t.ui['#btn-step@title'] = 'Perform the next step';
 	t.ui['#btn-quick'] = 'Quick';
 	t.ui['#btn-quick@title'] = 'Enter quick execution mode';
-	t.ui['#btn-edit'] = 'Edit';
+	t.ui['#btn-edit'] = 'Back to edit';
 	t.ui['#btn-edit@title'] = 'Return to the "edit" mode';
     t.ui['#btn-totu4'] = 'To TU4';
     t.ui['#btn-totu4@title'] = 'Convert to TU4 format';
@@ -40,12 +32,13 @@ i18n['en'] = (function() {
 
 	t.templates['title'] = 'Turing machine emulator, v{{version}}';
 
-	t.templates['error/parseError'] = 'Couldn\'t parse {{text}} ...';
-	t.templates['error/ambiguosTransition'] = 'Ambiguos transition for state "{{q}}" and symbol "{{a}}"';
-	t.templates['error/targetStateDoesNotExist'] = 'Target state "{{w}}" does not exist';
-	t.templates['error/initialStateDoesNotExist'] = 'Initial state "{{q}}" does not exist';
+	t.templates['error/parseError'] = 'Couldn\'t parse "{{text}}"';
+    t.templates['error/programIsEmpty'] = 'Program is empty';
+	t.templates['error/ambiguosCommand'] = 'Ambiguos transition for state "{{cmd.q}}" and symbol "{{cmd.a}}"';
+	t.templates['error/targetStateDoesNotExist'] = 'Target state "{{cmd.w}}" does not exist';
+	t.templates['error/initialStateDoesNotExist'] = 'Initial state "{{cmd.q}}" does not exist';
 	t.templates['error/headIsOutOfTape'] = 'Head is out of tape';
-	t.templates['error/noSuchTransition'] = 'Transition is undefined for state "{{q}}" and symbol "{{a}}"';
+	t.templates['error/noSuchCommand'] = 'Transition is undefined for state "{{q}}" and symbol "{{a}}"';
 
 	t.templates['info/finished'] = 'The machine has successfully finished it\'s work';
 
@@ -66,7 +59,7 @@ i18n['ru'] = (function() {
 	t.ui['#btn-step@title'] = 'Выполнить слещующий шаг программы';
 	t.ui['#btn-quick'] = 'Быстро';
 	t.ui['#btn-quick@title'] = 'Перейти в режим быстрого выполнения';
-	t.ui['#btn-edit'] = 'Править';
+	t.ui['#btn-edit'] = 'Вернуться к правке';
 	t.ui['#btn-edit@title'] = 'Вернуться в режим редактирования программы';
     t.ui['#btn-totu4'] = 'В формат TU4';
     t.ui['#btn-totu4@title'] = 'Преобразовать программу в формат TU4';
@@ -75,12 +68,13 @@ i18n['ru'] = (function() {
 
 	t.templates['title'] = 'Эмулятор машины Тьюринга в четвёрках, v{{version}}';
 
-	t.templates['error/parseError'] = 'Ошибка разбора: {{text}} ...';
-	t.templates['error/ambiguosTransition'] = 'Неоднозначный переход для состояния "{{q}}" и символа "{{a}}"';
-	t.templates['error/targetStateDoesNotExist'] = 'Целевое состояние "{{w}}" не существует';
-	t.templates['error/initialStateDoesNotExist'] = 'Начальное состояние "{{q}}" не существует';
+	t.templates['error/parseError'] = 'Ошибка разбора текста "{{text}}"';
+    t.templates['error/programIsEmpty'] = 'Программа пуста';
+	t.templates['error/ambiguosCommand'] = 'Неоднозначный переход для состояния "{{cmd.q}}" и символа "{{cmd.a}}"';
+	t.templates['error/targetStateDoesNotExist'] = 'Целевое состояние "{{cmd.w}}" не существует';
+	t.templates['error/initialStateDoesNotExist'] = 'Начальное состояние "{{cmd.q}}" не существует';
 	t.templates['error/headIsOutOfTape'] = 'Выход за границу ленты';
-	t.templates['error/noSuchTransition'] = 'Не определён переход для состояния "{{q}}" и символа "{{a}}"';
+	t.templates['error/noSuchCommand'] = 'Не определён переход для состояния "{{q}}" и символа "{{a}}"';
 
 	t.templates['info/finished'] = 'Машина успешно завершила работу';
 

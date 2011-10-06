@@ -31,7 +31,10 @@
                 program[cmd.q()] = {};
             }
             if(program[cmd.q()][cmd.a()]) {
-                throw new TM.AmbiguosCommandError(cmd);
+                throw new TM.AmbiguosCommandError({
+                    'cmd': cmd,
+                    'original': program[cmd.q()][cmd.a()]
+                });
             }
             program[cmd.q()][cmd.a()] = cmd;
         }
@@ -122,13 +125,13 @@
 
             if(!nextCommand) {
                 isRunning = false;
-                throw new NoSuchCommandError({ 'q': this.q(), 'a': this.a() });
+                throw new TM.NoSuchCommandError({ 'q': this.q(), 'a': this.a() });
             }
 
             if(nextCommand.isLeft()) {
                 if(pos === 0) {
                     isRunning = false;
-                    throw new OutOfTapeError(nextCommand);
+                    throw new TM.OutOfTapeError(nextCommand);
                 }
                 pos--;
             } else if(nextCommand.isRight()) {
@@ -156,9 +159,8 @@
     /** There is not a command for state 'q' and symbol 'a' */
     TM.NoSuchCommandError = function(data) { this.data = data }
 
-    TM.OutOfTapeError.prototype = 
-        TM.NoSuchCommandError.prototype = 
-        new TM.RuntimeError();
+    TM.OutOfTapeError.prototype = new TM.RuntimeError();
+    TM.NoSuchCommandError.prototype = new TM.RuntimeError();
     
     /** Generic compile error */
     TM.CompileError = function(data) { this.data = data }
@@ -174,12 +176,12 @@
     /** State referenced as the initial state does not exist */
     TM.NonexistentInitialState = function(data) { this.data = data }
 
-    TM.CouldntParseError.ptototype = 
-        TM.EmptyProgramError.prototype = 
-        TM.AmbiguosCommandError.prototype = 
-        TM.NonexistentTargetState.prototype =
-        TM.NonexistentInitialState.prototype = 
-        new TM.CompileError();
+    TM.CouldntParseError.prototype = new TM.CompileError();
+    TM.EmptyProgramError.prototype = new TM.CompileError();
+    TM.AmbiguosCommandError.prototype = new TM.CompileError();
+    TM.NonexistentTargetState.prototype = new TM.CompileError();
+    TM.NonexistentInitialState.prototype = new TM.CompileError();
+
 
     /**
      * A command of the Turing Machine
@@ -225,6 +227,10 @@
                this.v() !== '#' && this.v() !== '=';
     }
     
+    TM.Command.prototype.toString = function() {
+        return this.q() + ',' + this.a() + ',' + this.v() + ',' + this.w();
+    }
+    
     /**
      * Return ready-to-use Turing Machine program
      * - text - program text to parse
@@ -265,7 +271,11 @@
             // try to parse a command
             arr = /^([^\s]+),(.),(.),([^\s]+)/.exec(text);
             if(arr === null) {
-                throw new TM.CouldntParseError({ 'offset': pos });
+                throw new TM.CouldntParseError({
+                    'offset': pos,
+                    'text': text.substring(0, 10).replace(/\n/g, ' ')
+                        .replace(/^\s*/, '').replace(/\s*$/g, '')
+                });
             }
             
             cmd = new TM.Command(parseStateName(arr[1]) /* q */,
