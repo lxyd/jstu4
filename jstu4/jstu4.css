@@ -17,8 +17,8 @@ BODY { height: 100%; overflow: hidden; background-color: #FFF; }
 .wide-block {
     width: 100%;
     padding: 4px;
-    border: 1px solid #EEE;
-    background-color: #FAFAFA;
+    border: 1px solid #666;
+    background-color: #EEE;
     font-family: monospace;
     font-size: 10pt;
 
@@ -55,8 +55,8 @@ TEXTAREA.program {
 
 A.button {
     padding: 2px 4px;
-    border: 1px solid #EEE;
-    background-color: #EAEAEA;
+    border: 1px solid #666;
+    background-color: #DDD;
     text-decoration: none;
     font-size: 10pt;
     font-family: sans-serif;
@@ -64,7 +64,7 @@ A.button {
     line-height: 14pt;
 }
 A.button:hover {
-    background-color: #E0E0E0;
+    background-color: #EEE;
 }
 
 .placeholder-active {
