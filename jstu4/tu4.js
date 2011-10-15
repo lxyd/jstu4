@@ -47,7 +47,7 @@
             for(var a in program[q]) {
                 var cmd = program[q][a];
                 if(!program[cmd.w()]) {
-                    throw new TM.NonexistentTargetState(cmd);
+                    throw new TM.NonexistentTargetState({ 'cmd': cmd });
                 }
             }
         }
