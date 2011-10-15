@@ -75,7 +75,7 @@ H1 {
     font-weight: normal;
     margin: 7pt 0 10pt 0;
     font-size: 18pt;
-    text-align: center; 
+    text-align: center;
 }
 
 H1 .button {
@@ -84,7 +84,7 @@ H1 .button {
     margin-left: 12pt;
 }
 
-#display-tape .current, 
+#display-tape .current,
 #display-program .current {
     padding: 1px;
     margin: -1px;

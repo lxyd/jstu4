@@ -29,7 +29,7 @@ var datPlaceholder = 'placeholder',
 $.fn.val = function(value) {
     var data = $(this).data(datPlaceholder);
     if(typeof(value) === 'undefined' && data.enabled) {
-        // Return empty string when 
+        // Return empty string when
         // 1. we are getting a value
         // 2. element has data(datPlaceholderEnabled)
         // 3. this data is true
@@ -45,7 +45,7 @@ $.fn.val = function(value) {
 /**
  * Put a placeholder text to input elements like input/text or textarea
  * - phText - text to write as a placeholder [optional]
- *            if not set or is null, the 'placeholder' attribute will be 
+ *            if not set or is null, the 'placeholder' attribute will be
  *            considered
  * - cssClass - class to assign when placeholder is active [optional]
  */
@@ -62,11 +62,11 @@ $.fn.placeholder = function(phText, cssClass) {
         if(!text) {
             return;
         }
-        
+
         // Don't let browser handle placeholders
         self.removeAttr('placeholder');
-        
-        // Initially, enable placeholder when value is equal 
+
+        // Initially, enable placeholder when value is equal
         // to the placeholder text
         // That's necessary for properly handling 'back' button
         if(origVal.call(self) === '' || origVal.call(self) === data.text) {
@@ -89,7 +89,7 @@ $.fn.placeholder = function(phText, cssClass) {
 
 /** Return a url query parameter with the given name */
 jQuery.getRequestParameter = function(name) {
-    var re = new RegExp("(?:[?&]|^)" + 
+    var re = new RegExp("(?:[?&]|^)" +
             encodeURIComponent(name) + "=([^?&]*)(?:[?&]|$)"),
         res = re.exec(window.location.search);
     if(res === null) return null;

@@ -21,11 +21,11 @@
         throw new Error('HotMilk browser-jquery-version requires jQuery (http://jquery.com/) to run');
     }
 
-    
+
     //
     // import Milk
     //
-    
+
     var Milk = {};
     (function(exports) {
         var Expand, Find, Milk, Parse, TemplateCache, key;
@@ -321,15 +321,15 @@
           this.Milk = Milk;
         }
     })(Milk);
-    
-    
+
+
     //
     // Classes
     //
-    
+
     var PartialsCollection,
         GroupNode;
-    
+
     // use javascript inheritance mechanism to build a hierarchy of partial templates collections:
     //  var a = new PartialsCollection();  // a: {};
     //  a.t1 = "template 1"                // a.t1 === 'template 1'; a.hasOwnProperty('t1') === true;
@@ -340,12 +340,12 @@
         ctor.prototype = parentPartialsCollection || PartialsCollection.prototype;
         return new ctor();
     };
-    
+
     // GroupNode may not be called like a template, it may have children groups, templates and partials
     GroupNode = function(partials) {
         this.$ = partials || new PartialsCollection();
     };
-    
+
     // creates new templating function for given template and partialsCollection
     var createTemplatingFunction = function(template, partialsCollection) {
         return function(data) {
@@ -358,7 +358,7 @@
             });
         };
     };
-    
+
     // TemplateNode: is invokeable may have partials but may not have children
     var createTemplateNode = function(template, partialsCollection) {
         partialsCollection = partialsCollection || new PartialsCollection();
@@ -369,7 +369,7 @@
         templatingFunction.$removeTemplate = removeTemplate;
         return templatingFunction;
     };
-    
+
     // Partial template is also invokeable
     var createPartialTemplate = function(template, partialsCollection) {
         partialsCollection = partialsCollection || new PartialsCollection();
@@ -377,13 +377,13 @@
         templatingFunction.$value = template;
         return templatingFunction;
     };
-    
-    
+
+
     // for the case user creates template 'hasOwnProperty'
     var hasOwnProperty = function(obj, propName) {
         return Object.prototype.hasOwnProperty.call(obj, propName);
     };
-    
+
     var nodeIsEmpty = function(node) {
         for(var c in node) {
             // if node has ownProperty and this is a template or a TemplateGroup - this node is not empty
@@ -393,7 +393,7 @@
         }
         return true;
     };
-    
+
     var partialsCollectionIsEmpty = function(partialsCollection) {
         for(var c in partialsCollection) {
             if(hasOwnProperty(partialsCollection, c)) {
@@ -402,7 +402,7 @@
         }
         return true;
     };
-    
+
     var nodeNavigatePath = function(node, path) {
         for(var i = 0; node && i < path.length; i++) {
             // we can navigate further only if current node is a GroupNode and next jump is node's own property
@@ -410,7 +410,7 @@
         }
         return node || null /* null, undefined -> null */;
     };
-    
+
     var nodeBuildPath = function(node, path) {
         for(var i = 0; i < path.length; i++) {
             if(!hasOwnProperty(node, path[i])) {
@@ -423,9 +423,9 @@
         }
         return node;
     };
-    
+
     // recoursively clean path removing leafs of type GroupNode
-    // which contain no TemplateNodes nor partials 
+    // which contain no TemplateNodes nor partials
     var nodeCleanPath = function(node, path) {
         if(!path || path.length < 1) {
             return;
@@ -440,10 +440,10 @@
             delete node[path[0]];
         }
     };
-    
+
     // HotMilk is the root node
     var HotMilk = new GroupNode();
-    
+
     var pathRe = /^((?:[a-zA-Z_][a-zA-Z0-9$_]*\/)*[a-zA-Z_][a-zA-Z0-9$_]*)?(?:#([a-zA-Z$_][a-zA-Z0-9$_]*))?$/;
     var parsePath = function(pathStr) {
         var res = pathRe.exec(pathStr);
@@ -452,7 +452,7 @@
             partialName: res[2] || null /* '', null, undefined -> null */
         } : null;
     };
-    
+
     var addNormalTemplate = function(root, path, template) {
         if(path.length === 0) {
             throw new Error("Couldn't create template: name must not be empty");
@@ -472,7 +472,7 @@
             node[name] = createTemplateNode(template, new PartialsCollection(node.$));
         }
     };
-    
+
     var addPartialTemplate = function(root, path, partialName, template) {
         var node = nodeNavigatePath(root, path) || nodeBuildPath(root, path);
         if(hasOwnProperty(node.$, partialName)) {
@@ -480,7 +480,7 @@
         }
         node.$[partialName] = createPartialTemplate(template, node.$);
     };
-    
+
     var addTemplate = function(strPath, template){
         var path = parsePath(strPath);
         if(!path) {
@@ -492,7 +492,7 @@
             addPartialTemplate(this, path.path, path.partialName, template);
         }
     };
-    
+
     var removeTemplate = function(strPath) {
         var path = parsePath(strPath);
         if(!path) {
@@ -504,19 +504,19 @@
             removePartialTemplate(this, path.path, path.partialName);
         }
     };
-    
+
     var removeNormalTemplate = function(root, path) {
         var node = nodeNavigatePath(root, path.slice(0,-1)),
             name = path[path.length - 1];
         if(hasOwnProperty(node, name) && node[name] instanceof TemplateNode) {
             // replace TemplateNode with GroupNode saving partials if any
             node[name] = new GroupNode(node[name].$);
-            nodeCleanPath(root, path); 
+            nodeCleanPath(root, path);
         } else {
             throw new Error("Couldn't remove template: path " + path.join('/') + " does not exist");
         }
     };
-    
+
     var removePartialTemplate = function(root, path, partialName) {
         var node = nodeNavigatePath(root, path);
         if(node && hasOwnProperty(node.$, partialName)) {
@@ -526,14 +526,14 @@
             throw new Error("Couldn't remove template: path " + path.join('/') + "#" + partialName + " does not exist");
         }
     };
-    
+
     // expand hotmilk root with some properties
     HotMilk.$version = '1.1';
     HotMilk.$Milk = Milk;
-    
+
     GroupNode.prototype.$addTemplate = addTemplate;
     GroupNode.prototype.$removeTemplate = removeTemplate;
-    
+
 
     $.HotMilk = HotMilk;
 

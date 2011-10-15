@@ -1,27 +1,27 @@
 ﻿<!DOCTYPE html>
 <html>
-	<head>
-		<title>Turing Machine emulator</title>
-		<link rel="stylesheet" href="help.css"/>
-	</head>
-	<body>
+    <head>
+        <title>Turing Machine emulator</title>
+        <link rel="stylesheet" href="help.css"/>
+    </head>
+    <body>
         <div class="wrapper">
             <p>
                 <a href="#" onclick="history.back(); return false;">&larr; Back to program</a>
             </p>
 
-            <h1>Turing Machine emulator</h1>
+            <h1>Turing Machine emulator in 4-tuples</h1>
 
             <h2>About</h2>
             <p>
-                TODO: what is this program created for
+                This program is written for students studying algorithmic theory.
             </p>
             <p>
                 &copy; Alexey Dubinin<br/>
                 Application is available on the github: <a href="https://github.com/lxyd/jstu4">https://github.com/lxyd/jstu4</a><br/>
                 This software is distributed under the terms of the MIT License. See <a href="COPYING-EN">COPYING</a> for details
             </p>
-            
+
             <p>
                 The following third-party components are included:
             </p>
@@ -45,46 +45,45 @@
                 Available commands:<br/>
                 &gt; - move right;<br/>
                 &lt; - move left;<br/>
-                = - don't move this time;<br/>
+                = - don't move at this turn;<br/>
                 # - stop the machine.<br/>
             </p>
 
-            <p>TODO: translate</p>
-            <p>Можно записывать несколько команд в строку, разделяя их одним или несколькими пробелами.</p>
-            <p>Поддерживаются именованные состояния, но имена состояний, состоящие из одних цифр, считаются целыми числами (т.е. 01 и 1 - это одно и то же). Начальное состояние должно иметь имя 0.</p>
-            
-            <p>В процессе работы выполненые команды помечаются цветом. Сбросить пометки можно в любой момент нажав кнопку "Сбросить метки"</p>
-            
-            <p>Лента ограничена слева, умолчального пробельного символа не предполагается, старайтесь не забывать его ставить</p>
+            <p>You can write several commands in one separating them with any number of spaces.</p>
+            <p>Named states are supported. State names which consist of digits only are interpreted as decimal numbers, so 01 and 1 represent the same state.</p>
 
-            <p>Команды эмулятора:</p>
+            <p>While program is running commands are marked with different color. You can clear thouse marks by clicking the "Unmark" button</p>
+
+            <p>The tape is limited at the left edge.</p>
+
+            <p>Buttons description:</p>
             <ul>
-                <li>"Старт" - разбирает программу и запускает её на выполнение;</li>
-                <li>"Быстро" - запустить программу в быстром, автоматическом режиме;</li>
-                <li>"Шаг" - выполнить следующий шаг, при необходимости выйдя из быстрого режима;</li>
-                <li>"Вернуться к правке" - вернуться к редактированию программы и ленты;</li>
-                <li>"В формат TU4" - преобразовать программу в формат эмулятора tu4 (все имена состояний заменить на шестнадцатеричные числа 0x00&nbsp;-&nbsp;0xFF).</li>
-            </ul>
-            
-            <p>Горячие клавиши:</p>
-            <ul>
-                <li>Ctrl+Enter в режиме правки - запуск программы на выполнение (также можно просто нажать Enter, если в данный момент в фокусе находится поле ввода ленты);</li>
-                <li>Enter или Ctrl+Enter в режиме выполнения - включить/выключить быстрый режим;</li>
-                <li>Пробел в режиме выполнения - выполнить один шаг, при необходимости выйдя из быстрого режима;</li>
-                <li>Esc в режиме выполнения - вернуться к редактированию программы и ленты;</li>
+                <li>"Start" - parse program and run it;</li>
+                <li>"Step" - perform the next step (quick mode will be canceled if active);</li>
+                <li>"Quick" - don't wait for user to click "Step", just run;</li>
+                <li>"Back to edit" - stop program and return to edit mode;</li>
+                <li>"To TU4" - convert program to the TU4 format (replace state names with hex numbers: 0x00&nbsp;-&nbsp;0xFF).</li>
             </ul>
 
-            <p>Пример (ненормированная замена 0 на 1 и наоборот):</p>
+            <p>Hotkeys:</p>
+            <ul>
+                <li>Ctrl+Enter in edit mode - run program (also Enter key in the "Tape" field will do);</li>
+                <li>Enter or Ctrl+Enter in run mode - toggle quick run;</li>
+                <li>Space in run mode - perform the next step;</li>
+                <li>Esc in run mode - return to the edit mode;</li>
+            </ul>
+
+            <p>Example (will replace 0 to 1 and 1 to 0 in place):</p>
             <code>
                 00,&nbsp;,&lt;,rep<br/>
                 rep,0,1,mov&nbsp;&nbsp;rep,1,0,mov&nbsp;&nbsp;rep,&nbsp;,&gt;,fin<br/>
                 mov,0,&lt;,rep&nbsp;&nbsp;mov,1,&lt;,rep<br/>
                 fin,0,&gt;,fin&nbsp;&nbsp;fin,1,&gt;,fin&nbsp;&nbsp;fin,&nbsp;,#,fin
             </code>
-            
+
             <p>
                 <a href="#" onclick="history.back(); return false;">&larr; Back to program</a>
             </p>
         </div>
-	</body>
+    </body>
 </html>

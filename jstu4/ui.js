@@ -26,7 +26,7 @@ deferredResizeProgramBlocks = function() {
         $('.program').each(function() {
             var p = this.parentNode,
                 m = parseFloat($(p).css('padding-bottom').replace('px', ''));
-            $(this).css('height', 
+            $(this).css('height',
                 (p.clientHeight - this.offsetTop + p.offsetTop - m) + 'px');
         });
     }, 0);
@@ -94,9 +94,9 @@ tapeToHTML = function(tape, pos) {
     while(tape.length <= pos) {
         tape += ' ';
     }
-    return toHTML(tape.substring(0, pos)) + 
-        '<span class="current">' + 
-        charToHTML(tape.charAt(pos)) + '</span>' + 
+    return toHTML(tape.substring(0, pos)) +
+        '<span class="current">' +
+        charToHTML(tape.charAt(pos)) + '</span>' +
         toHTML(tape.substring(pos + 1));
 },
 
@@ -107,7 +107,7 @@ cDisplayTape,
 cInputTape,
 cLog,
 
-/** 
+/**
  * Forced program textarea cursor position
  * Need this to be able to scroll the textarea
  * to the specified error or command
@@ -149,16 +149,16 @@ doCompile = function() {
             htmlParts.push(toHTML(text.substring(pos, cmd.data.offset)));
 
             cmd.data.id = cmdID++;
-            htmlParts.push('<span id="command-' + cmd.data.id + '">' + 
+            htmlParts.push('<span id="command-' + cmd.data.id + '">' +
                     toHTML(cmd.data.src) + '</span>');
 
             pos = cmd.data.offset + cmd.data.src.length;
         };
-    
+
     try {
         res.tm = TM.compile(text, 0, callback);
         res.html = htmlParts.join('');
-        
+
         return res;
     } catch(err) {
         if(err instanceof TM.CouldntParseError) {
@@ -181,13 +181,13 @@ doCompile = function() {
             setUIMode(UIModes.error);
         } else if(err instanceof TM.AmbiguosCommandError) {
             cDisplayProgram.html(htmlParts.join(''));
-            
+
             textareaCursorPosForced = err.data.cmd.offset;
             log(T.error.ambiguosCommand(constructTemplateModel(err.data)), true);
 
             $('#command-' + err.data.original.data.id).addClass('error');
             $('#command-' + err.data.cmd.data.id).addClass('error');
-            
+
             setUIMode(UIModes.error);
             // first, scroll to the position we were during editing
             cDisplayProgram.scrollTo(scroll);
@@ -196,12 +196,12 @@ doCompile = function() {
             cDisplayProgram.scrollTo('.error[1]');
         } else if(err instanceof TM.NonexistentTargetState) {
             cDisplayProgram.html(htmlParts.join(''));
-            
+
             textareaCursorPosForced = err.data.cmd.offset;
             log(T.error.targetStateDoesNotExist(constructTemplateModel(err.data)), true);
 
             $('#command-' + err.data.cmd.data.id).addClass('error');
-            
+
             setUIMode(UIModes.error);
             // first, scroll to the position we were during editing
             cDisplayProgram.scrollTo(scroll);
@@ -242,7 +242,7 @@ doStart = function() {
 
 doStep = function() {
     var success = true;
-    
+
     if(!tmRun.isRunning()) {
         return false;
     }
@@ -275,7 +275,7 @@ doQuick = function() {
     if(tmTimer) {
         return;
     }
-    
+
     tmTimer = setInterval(function() {
         if(!doStep()) {
             leaveQuickMode();
@@ -285,7 +285,7 @@ doQuick = function() {
 
 doEdit = function() {
     var scroll = cDisplayProgram.scrollTop();
-    
+
     tmRun = null;
     setUIMode(UIModes.edit);
     if(textareaCursorPosForced !== null) {
@@ -341,7 +341,7 @@ doToTU4 = function() {
                 states[cmds[i].q()] = statenum ++;
             }
         }
-        
+
         res = [];
         for(var i = 0; i < cmds.length; i++) {
             res.push(new TM.Command(
@@ -351,7 +351,7 @@ doToTU4 = function() {
                             intStateToString(states[cmds[i].w()])
                          ).toString());
         }
-        
+
         cInputProgram.val(res.join('\n'));
     }
 };
@@ -376,7 +376,7 @@ $(function() {
 
     cInputTape.placeholder(L.texts.tape, 'placeholder-active');
     cInputProgram.placeholder(L.texts.program, 'placeholder-active');
-    
+
     $('#btn-help').attr('href', T.helpURL(m));
 
     for(var k in L.ui) {
@@ -390,28 +390,28 @@ $(function() {
 
     // resize program textarea
     deferredResizeProgramBlocks();
-    
+
     // bind events
-    
+
     $(window).resize(deferredResizeProgramBlocks);
 
     $('#btn-start').click(function() {
         doStart();
         return false;
     });
-            
+
     $('#btn-edit').click(function() {
         leaveQuickMode();
         doEdit();
         return false;
     });
-    
+
     $('#btn-step').click(function() {
         leaveQuickMode();
         doStep();
         return false;
     });
-    
+
     $('#btn-unmark').click(function() {
         leaveQuickMode();
         doUnmark();
@@ -422,12 +422,12 @@ $(function() {
         doQuick();
         return false;
     });
-    
+
     $('#btn-totu4').click(function() {
         doToTU4();
         return false;
     });
-    
+
     (function() {
     var mods = {
             ctrl: false
@@ -438,7 +438,7 @@ $(function() {
             space: function(k) { return k == 32; },
             escape: function(k) { return k == 27; }
         };
-    
+
     $(document).keydown(function(ev) {
         if(keys.ctrl(ev.keyCode)) {
             mods.ctrl = true;
@@ -466,7 +466,7 @@ $(function() {
                         setTimeout(function() {
                             cInputTape.focus();
                         }, 10);
-                        /* sometimes we get cInputProgram focused, so 
+                        /* sometimes we get cInputProgram focused, so
                         deffer this 10ms */
                     }
                 }, 0);
@@ -486,7 +486,7 @@ $(function() {
                         setTimeout(function() {
                             cInputTape.focus();
                         }, 10);
-                        /* sometimes we get cInputProgram focused, so 
+                        /* sometimes we get cInputProgram focused, so
                         deffer this 10ms */
                     }
                 }, 0);
@@ -499,7 +499,7 @@ $(function() {
                     setTimeout(function() {
                         cInputProgram.focus();
                     }, 10);
-                    /* sometimes we get cInputProgram focused, so 
+                    /* sometimes we get cInputProgram focused, so
                     deffer this 10ms */
                 }, 0);
                 return false;
@@ -515,7 +515,7 @@ $(function() {
             return false;
         }
     });
-    
+
     cInputProgram.keypress(function(ev) {
         var key = ev.which || ev.keyCode || ev.charCode;
         if(mods.ctrl && keys.enter(key)) {
@@ -524,7 +524,7 @@ $(function() {
             return false;
         }
     });
-    
+
     })();
 
     cDisplayProgram.click(function() {

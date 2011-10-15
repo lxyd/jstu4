@@ -3,12 +3,12 @@
      * Build new Turing Machine
      * - commands - array of TM.Command instances
      * - q0 - initial state [optional]
-     * 
+     *
      * Throws TM.CompileError of types:
      * - TM.EmptyProgramError when program is empty
      * - TM.AmbiguosCommandError when program contains two or more
      *       commands with the same q and a
-     * - TM.NonexistentTargetState when there is not any 
+     * - TM.NonexistentTargetState when there is not any
      *       transition for a state, mentioned as a target state
      * - TM.NonexistentInitialState when there is not any
      *       transition for a state, passed as initial
@@ -74,10 +74,10 @@
         this.run = function(tape) {
             return new TMRun(program, tape, q0);
         }
-        
+
     }
 
-    TM.version = '2.0';
+    TM.version = '2.1';
 
     var TMRun = function(program, tape, q0) {
         tape = tape.replace(/\s*$/, '');
@@ -114,7 +114,7 @@
          * If machine is running, perform a step and return true
          * Otherwise, return false
          *
-         * Throws 
+         * Throws
          * - TM.NoSuchCommandError
          * - TM.OutOfTapeError
          */
@@ -150,7 +150,7 @@
             return true;
         }
     }
-    
+
     /** Generic runtime error */
     TM.RuntimeError = function(data) { this.data = data }
 
@@ -161,7 +161,7 @@
 
     TM.OutOfTapeError.prototype = new TM.RuntimeError();
     TM.NoSuchCommandError.prototype = new TM.RuntimeError();
-    
+
     /** Generic compile error */
     TM.CompileError = function(data) { this.data = data }
 
@@ -199,9 +199,9 @@
         this.w = function() { return w }
         this.data = data; // public mutable attribute
     }
-    
+
     // different types of TMCommand
-    
+
     /** Check if the command is a 'move left' command */
     TM.Command.prototype.isLeft = function() {
         return this.v() === '<';
@@ -212,7 +212,7 @@
     }
     /** Check if the command is a 'stop' command */
     TM.Command.prototype.isStop = function() {
-        return this.v() === '#' || 
+        return this.v() === '#' ||
               (this.a() === this.v() && this.q() === this.w());
     }
     /** Check if the command is a 'stay' command */
@@ -223,14 +223,14 @@
     /** Check if the command is a 'write symbol' command */
     TM.Command.prototype.isWrite = function() {
         return this.v() !== this.a() &&
-               this.v() !== '<' && this.v() !== '>' && 
+               this.v() !== '<' && this.v() !== '>' &&
                this.v() !== '#' && this.v() !== '=';
     }
-    
+
     TM.Command.prototype.toString = function() {
         return this.q() + ',' + this.a() + ',' + this.v() + ',' + this.w();
     }
-    
+
     /**
      * Return ready-to-use Turing Machine program
      * - text - program text to parse
@@ -242,7 +242,7 @@
      * - TM.EmptyProgramError when program is empty
      * - TM.AmbiguosCommandError when program contains two or more
      *       commands with the same q and a
-     * - TM.NonexistentTargetState when there is not any 
+     * - TM.NonexistentTargetState when there is not any
      *       transition for a state, mentioned as a target state
      * - TM.NonexistentInitialState when there is not any
      *       transition for a state, passed as initial
@@ -267,7 +267,7 @@
                 pos += arr[0].length;
                 text = text.substring(arr[0].length);
             }
-            
+
             // try to parse a command
             arr = /^([^\s]+),(.),(.),([^\s]+)/.exec(text);
             if(arr === null) {
@@ -277,7 +277,7 @@
                         .replace(/^\s*/, '').replace(/\s*$/g, '')
                 });
             }
-            
+
             cmd = new TM.Command(parseStateName(arr[1]) /* q */,
                                  arr[2] /* a */,
                                  arr[3] /* v */,
@@ -286,7 +286,7 @@
                                      'src': arr[0],
                                      'offset': pos
                                  } /* data */);
-            
+
             pos += arr[0].length;
             text = text.substring(arr[0].length);
 
@@ -296,7 +296,7 @@
                 cmdCallback(cmd);
             }
         }
-        
+
         if(typeof(q0) === 'undefined' || q0 === null) {
             q0 = null; // let the TM constructor decide
         } else {
@@ -305,6 +305,6 @@
 
         return new TM(commands, q0);
     }
-    
+
     global.TM = TM;
 })(this);
