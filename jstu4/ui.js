@@ -209,12 +209,9 @@ doCompile = function() {
             cDisplayProgram.scrollTo('.error');
         } else if(err instanceof TM.NonexistentInitialState) {
             cDisplayProgram.html(htmlParts.join(''));
-            
-            textareaCursorPosForced = err.data.cmd.offset;
+
             log(T.error.initialStateDoesNotExist(constructTemplateModel(err.data)), true);
 
-            $('#command-' + err.data.cmd.data.id).addClass('error');
-            
             setUIMode(UIModes.error);
             // first, scroll to the position we were during editing
             cDisplayProgram.scrollTo(scroll);
@@ -317,7 +314,7 @@ doToTU4 = function() {
         /** Convert integer state number to string sutable for tu4 */
         intStateToString = function(s) {
             var res;
-            // слишком много состояний было (максимальный номер больше 99)
+            // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ (пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ 99)
             if(statenum >= 100) {
                 res = s.toString(16);
             } else {
@@ -337,7 +334,7 @@ doToTU4 = function() {
         });
 
         states = {};
-        states[0] = 0; // нулевое состояние всегда нулевое
+        states[0] = 0; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         statenum = 1;
         for(var i = 0; i < cmds.length; i++) {
             if(typeof(states[cmds[i].q()]) === 'undefined' || states[cmds[i].q()] === null) {
