@@ -77,7 +77,7 @@
 
     }
 
-    TM.version = '2.1';
+    TM.version = '2.2';
 
     var TMRun = function(program, tape, q0) {
         tape = tape.replace(/\s*$/, '');
@@ -260,12 +260,22 @@
             };
 
         // do while text is not empty
-        while(!/^\s*$/.test(text)) {
+        //while(!/^\s*$/.test(text)) {
+        while(text) {
             // skip whitespaces
-            arr = /^\s*/.exec(text);
+            arr = /^\s+/.exec(text);
             if(arr !== null) {
                 pos += arr[0].length;
                 text = text.substring(arr[0].length);
+                continue;
+            }
+
+            // skip a comment if any
+            arr = /^(#|\/\/)[^\n]*(\n|$)/.exec(text);
+            if(arr !== null) {
+                pos += arr[0].length;
+                text = text.substring(arr[0].length);
+                continue;
             }
 
             // try to parse a command

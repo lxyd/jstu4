@@ -50,6 +50,10 @@
             </p>
 
             <p>You can write several commands in one separating them with any number of spaces.</p>
+            <p>
+                C-style (//) or shell-style comments can be added to program. Note: there must be at least one space/linebreak between a command and a comment.
+            </p>
+
             <p>Named states are supported. State names which consist of digits only are interpreted as decimal numbers, so 01 and 1 represent the same state.</p>
 
             <p>While program is running commands are marked with different color. You can clear thouse marks by clicking the "Unmark" button</p>
@@ -60,7 +64,7 @@
             <ul>
                 <li>"Start" - parse program and run it;</li>
                 <li>"Step" - perform the next step (quick mode will be canceled if active);</li>
-                <li>"Quick" - don't wait for user to click "Step", just run;</li>
+                <li>"Quick" - don't wait for user to click "Step", just run. When clicked again: run faster;</li>
                 <li>"Back to edit" - stop program and return to edit mode;</li>
                 <li>"To TU4" - convert program to the TU4 format (replace state names with hex numbers: 0x00&nbsp;-&nbsp;0xFF).</li>
             </ul>
@@ -76,9 +80,9 @@
             <p>Example (will replace 0 to 1 and 1 to 0 in place):</p>
             <code>
                 00,&nbsp;,&lt;,rep<br/>
-                rep,0,1,mov&nbsp;&nbsp;rep,1,0,mov&nbsp;&nbsp;rep,&nbsp;,&gt;,fin<br/>
-                mov,0,&lt;,rep&nbsp;&nbsp;mov,1,&lt;,rep<br/>
-                fin,0,&gt;,fin&nbsp;&nbsp;fin,1,&gt;,fin&nbsp;&nbsp;fin,&nbsp;,#,fin
+                rep,0,1,mov&nbsp;&nbsp;rep,1,0,mov&nbsp;&nbsp;rep,&nbsp;,&gt;,fin&nbsp;&nbsp;// rewrite cell<br/>
+                mov,0,&lt;,rep&nbsp;&nbsp;mov,1,&lt;,rep&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;# do a step to the left<br/>
+                fin,0,&gt;,fin&nbsp;&nbsp;fin,1,&gt;,fin&nbsp;&nbsp;fin,&nbsp;,#,fin&nbsp;&nbsp;// finally, move to the right
             </code>
 
             <p>

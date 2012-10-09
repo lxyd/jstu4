@@ -37,6 +37,7 @@ tmRun,
 
 /** Timer for quick run */
 tmTimer = null,
+tmTimeout,
 
 leaveQuickMode = function() {
     if(tmTimer) {
@@ -157,6 +158,7 @@ doCompile = function() {
 
     try {
         res.tm = TM.compile(text, 0, callback);
+        htmlParts.push(toHTML(text.substring(pos)));
         res.html = htmlParts.join('');
 
         return res;
@@ -271,16 +273,20 @@ doStep = function() {
     return success;
 },
 
+quickTimerFunction = function() {
+    if(!doStep()) {
+        leaveQuickMode();
+    }
+},
+
 doQuick = function() {
     if(tmTimer) {
-        return;
+        clearInterval(tmTimer);
+        tmTimeout = 80 - tmTimeout;
+    } else {
+        tmTimeout = 70;
     }
-
-    tmTimer = setInterval(function() {
-        if(!doStep()) {
-            leaveQuickMode();
-        }
-    }, 50);
+    tmTimer = setInterval(quickTimerFunction, tmTimeout);
 },
 
 doEdit = function() {
@@ -314,7 +320,8 @@ doToTU4 = function() {
         /** Convert integer state number to string sutable for tu4 */
         intStateToString = function(s) {
             var res;
-            // ������� ����� ��������� ���� (������������ ����� ������ 99)
+            // tu4 programs can contain up to 99 decimal or 256 hex states
+            // try to use decimal names if possible
             if(statenum >= 100) {
                 res = s.toString(16);
             } else {
@@ -334,7 +341,7 @@ doToTU4 = function() {
         });
 
         states = {};
-        states[0] = 0; // ������� ��������� ������ �������
+        states[0] = 0; // first state is zeroth one always
         statenum = 1;
         for(var i = 0; i < cmds.length; i++) {
             if(typeof(states[cmds[i].q()]) === 'undefined' || states[cmds[i].q()] === null) {

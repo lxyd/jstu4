@@ -84,6 +84,14 @@ H1 .button {
     margin-left: 12pt;
 }
 
+#display-program {
+    color: #999;
+}
+
+#display-program SPAN {
+    color: #000;
+}
+
 #display-tape .current,
 #display-program .current {
     padding: 1px;
