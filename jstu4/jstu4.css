@@ -1,4 +1,4 @@
-﻿* { margin: 0; padding: 0; outline: 0 none; }
+﻿* { MARGIn: 0; padding: 0; outline: 0 none; }
 HTML { height: 100%; }
 BODY { height: 100%; overflow: hidden; background-color: #FFF; }
 
@@ -117,4 +117,14 @@ H1 .button {
 
 #log.info {
     color: #0A0;
+}
+
+#stats {
+    font-family: monospace;
+    color: #666;
+    text-align: center;
+}
+
+#stats B {
+    color: #333;
 }

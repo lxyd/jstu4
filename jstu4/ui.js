@@ -39,6 +39,8 @@ tmRun,
 tmTimer = null,
 tmTimeout,
 
+stats = {},
+
 leaveQuickMode = function() {
     if(tmTimer) {
         clearInterval(tmTimer);
@@ -107,6 +109,7 @@ cInputProgram,
 cDisplayTape,
 cInputTape,
 cLog,
+cStats,
 
 /**
  * Forced program textarea cursor position
@@ -142,10 +145,13 @@ doCompile = function() {
         cmdID = 0,
         res = {
             tm: null,
-            html: ''
+            html: '',
+            commandsCount: 0
         },
         scroll = cInputProgram.scrollTop(),
         callback = function(cmd) {
+            res.commandsCount++;
+
             // add whitespace to the html
             htmlParts.push(toHTML(text.substring(pos, cmd.data.offset)));
 
@@ -239,6 +245,14 @@ doStart = function() {
         cDisplayProgram.scrollTo(scroll);
         selectCommand(tmRun.nextCommand());
         log(null);
+        // reset stats
+        stats = {
+            commandsCount: compileResult.commandsCount,
+            operationsCount: 0,
+            initialDataLength: tmRun.tape().length,
+            maxDataLength: tmRun.tape().length
+        }
+        cStats.html(T.stats(constructTemplateModel(stats)));
     }
 },
 
@@ -250,6 +264,10 @@ doStep = function() {
     }
     try {
         tmRun.step();
+        // update stats
+        stats.operationsCount++;
+        stats.maxDataLength = tmRun.tape().length > stats.maxDataLength ? tmRun.tape().length : stats.maxDataLength;
+        cStats.html(T.stats(constructTemplateModel(stats)));
     } catch(err) {
         success = false;
         cDisplayTape.html(tapeToHTML(tmRun.tape(), tmRun.pos()));
@@ -374,6 +392,7 @@ $(function() {
     cDisplayTape = $('#display-tape');
     cInputTape = $('#input-tape');
     cLog = $('#log');
+    cStats = $('#stats');
 
     // draw localized texts
     var m = constructTemplateModel();
