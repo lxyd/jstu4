@@ -43,7 +43,6 @@ i18n['en'] = (function() {
     t.templates['info/finished'] = 'The machine has successfully finished it\'s work';
 
     t.templates['warning/notNormal_SrcAltered'] = 'WARN: Source data not retained';
-    t.templates['warning/notNormal_TooManySpaces'] = 'WARN: Words on tape should be separated with a single space';
     t.templates['warning/notNormal_Misposition'] = 'WARN: Head should be positioned immediately after the result';
 
     t.templates['stats'] = 'Code size: <b>{{commandsCount}}</b> transitions. Message length: <b>{{initialDataLength}}</b>. Cells used: <b>{{maxDataLength}}</b>. Actions performed: <b>{{operationsCount}}</b>';
@@ -85,7 +84,6 @@ i18n['ru'] = (function() {
     t.templates['info/finished'] = 'Машина успешно завершила работу';
 
     t.templates['warning/notNormal_SrcAltered'] = '!!! Затёрты/изменены исходные данные';
-    t.templates['warning/notNormal_TooManySpaces'] = '!!! Слова на ленте должны разделяться одним пробелом';
     t.templates['warning/notNormal_Misposition'] = '!!! Головка должна останавливаться после результата';
 
     t.templates['stats'] = 'Команд в программе <b>{{commandsCount}}</b>. Длина исходного сообщения: <b>{{initialDataLength}}</b>. Использовано ячеек: <b>{{maxDataLength}}</b>. Выполнено операций: <b>{{operationsCount}}</b>';

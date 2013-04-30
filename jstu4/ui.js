@@ -298,8 +298,6 @@ doStep = function() {
         log(T.warning.notNormal_SrcAltered(constructTemplateModel()), 'warning');
     } else if(cur.replace(/\s*$/, '').length != pos) {
         log(T.warning.notNormal_Misposition(constructTemplateModel()), 'warning');
-    } else if(cur.indexOf('  ') >= 0) {
-        log(T.warning.notNormal_TooManySpaces(constructTemplateModel()), 'warning');
     } else {
         log(T.info.finished(constructTemplateModel()));
     }
