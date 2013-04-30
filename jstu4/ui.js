@@ -130,10 +130,12 @@ selectCommand = function(cmd) {
 },
 
 log = function(text, isError) {
-    if(isError) {
-        cLog.removeClass('info').addClass('error');
+    if (isError == 'warning') {
+        cLog.removeClass('info warning error').addClass('warning');
+    } else if(isError) {
+        cLog.removeClass('info warning error').addClass('error');
     } else {
-        cLog.removeClass('error').addClass('info');
+        cLog.removeClass('info warning error').addClass('info');
     }
     cLog.html(text || '');
 },
@@ -257,11 +259,10 @@ doStart = function() {
 },
 
 doStep = function() {
-    var success = true;
-
     if(!tmRun.isRunning()) {
         return false;
     }
+
     try {
         tmRun.step();
         // update stats
@@ -269,7 +270,6 @@ doStep = function() {
         stats.maxDataLength = tmRun.tape().length > stats.maxDataLength ? tmRun.tape().length : stats.maxDataLength;
         cStats.html(T.stats(constructTemplateModel(stats)));
     } catch(err) {
-        success = false;
         cDisplayTape.html(tapeToHTML(tmRun.tape(), tmRun.pos()));
         if(err instanceof TM.NoSuchCommandError) {
             log(T.error.noSuchCommand(err.data), true);
@@ -278,17 +278,32 @@ doStep = function() {
         } else {
             throw err;
         }
+        return false;
     }
-    if(success) {
-        cDisplayTape.html(tapeToHTML(tmRun.tape(), tmRun.pos()));
-        selectCommand(tmRun.nextCommand());
-        if(tmRun.isRunning()) {
-            log(null);
-        } else {
-            log(T.info.finished(constructTemplateModel()), false);
-        }
+
+    cDisplayTape.html(tapeToHTML(tmRun.tape(), tmRun.pos()));
+    selectCommand(tmRun.nextCommand());
+
+    if(tmRun.isRunning()) {
+        log(null);
+        return true;
     }
-    return success;
+
+    // check normality
+    var src = tmRun.initialTape()
+      , cur = tmRun.tape()
+      , pos = tmRun.pos();
+
+    if(cur.substring(0, src.length).replace(/\s*$/, '') != src.replace(/\s*$/, '')) {
+        log(T.warning.notNormal_SrcAltered(constructTemplateModel()), 'warning');
+    } else if(cur.replace(/\s*$/, '').length != pos) {
+        log(T.warning.notNormal_Misposition(constructTemplateModel()), 'warning');
+    } else if(cur.indexOf('  ') >= 0) {
+        log(T.warning.notNormal_TooManySpaces(constructTemplateModel()), 'warning');
+    } else {
+        log(T.info.finished(constructTemplateModel()));
+    }
+    return true;
 },
 
 quickTimerFunction = function() {

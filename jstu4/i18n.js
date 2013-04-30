@@ -42,6 +42,10 @@ i18n['en'] = (function() {
 
     t.templates['info/finished'] = 'The machine has successfully finished it\'s work';
 
+    t.templates['warning/notNormal_SrcAltered'] = 'WARN: Source data not retained';
+    t.templates['warning/notNormal_TooManySpaces'] = 'WARN: Words on tape should be separated with a single space';
+    t.templates['warning/notNormal_Misposition'] = 'WARN: Head should be positioned immediately after the result';
+
     t.templates['stats'] = 'Code size: <b>{{commandsCount}}</b> transitions. Message length: <b>{{initialDataLength}}</b>. Cells used: <b>{{maxDataLength}}</b>. Actions performed: <b>{{operationsCount}}</b>';
 
     return t;
@@ -72,13 +76,17 @@ i18n['ru'] = (function() {
 
     t.templates['error/parseError'] = 'Ошибка разбора текста "{{text}}"';
     t.templates['error/programIsEmpty'] = 'Программа пуста';
-    t.templates['error/ambiguosCommand'] = 'Неоднозначный переход для состояния "{{cmd.q}}" и символа "{{cmd.a}}"';
+    t.templates['error/ambiguosCommand'] = 'Неоднозначный переход для состояния "{{cmd.q}}" и знака "{{cmd.a}}"';
     t.templates['error/targetStateDoesNotExist'] = 'Целевое состояние "{{cmd.w}}" не существует';
     t.templates['error/initialStateDoesNotExist'] = 'Начальное состояние "{{q}}" не существует';
     t.templates['error/headIsOutOfTape'] = 'Выход за границу ленты';
-    t.templates['error/noSuchCommand'] = 'Не определён переход для состояния "{{q}}" и символа "{{a}}"';
+    t.templates['error/noSuchCommand'] = 'Не определён переход для состояния "{{q}}" и знака "{{a}}"';
 
     t.templates['info/finished'] = 'Машина успешно завершила работу';
+
+    t.templates['warning/notNormal_SrcAltered'] = '!!! Затёрты/изменены исходные данные';
+    t.templates['warning/notNormal_TooManySpaces'] = '!!! Слова на ленте должны разделяться одним пробелом';
+    t.templates['warning/notNormal_Misposition'] = '!!! Головка должна останавливаться после результата';
 
     t.templates['stats'] = 'Команд в программе <b>{{commandsCount}}</b>. Длина исходного сообщения: <b>{{initialDataLength}}</b>. Использовано ячеек: <b>{{maxDataLength}}</b>. Выполнено операций: <b>{{operationsCount}}</b>';
 

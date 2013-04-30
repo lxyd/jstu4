@@ -119,6 +119,10 @@ H1 .button {
     color: #0A0;
 }
 
+#log.warning {
+    color: #B60;
+}
+
 #stats {
     font-family: monospace;
     color: #666;

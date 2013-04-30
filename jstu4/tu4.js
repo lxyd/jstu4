@@ -84,7 +84,8 @@
         var isRunning = true,
             q = q0,
             pos = tape.length,
-            nextCommand;
+            nextCommand,
+            initialTape;
 
         /** Check if the machine has stopped */
         this.isRunning = function() { return isRunning }
@@ -105,9 +106,12 @@
             }
             return tape;
         }
+        /** Get the initial tape state */
+        this.initialTape = function() { return initialTape }
         /** Get the next command to be executed */
         this.nextCommand = function() { return nextCommand }
 
+        initialTape = this.tape();
         nextCommand = program[q][this.a()];
 
         /**
