@@ -77,7 +77,7 @@
 
     }
 
-    TM.version = '2.3';
+    TM.version = '2.3.1';
 
     var TMRun = function(program, tape, q0) {
         tape = tape.replace(/\s*$/, '');
@@ -264,7 +264,6 @@
             };
 
         // do while text is not empty
-        //while(!/^\s*$/.test(text)) {
         while(text) {
             // skip whitespaces
             arr = /^\s+/.exec(text);
@@ -287,8 +286,8 @@
             if(arr === null) {
                 throw new TM.CouldntParseError({
                     'offset': pos,
-                    'text': text.substring(0, 10).replace(/\n/g, ' ')
-                        .replace(/^\s*/, '').replace(/\s*$/g, '')
+                    'text': text.replace(/\n/g, ' ').replace(/^\s*/, '')
+                        .substring(0, 10).replace(/\s*$/g, '')
                 });
             }
 
