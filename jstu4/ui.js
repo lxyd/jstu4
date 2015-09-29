@@ -413,8 +413,8 @@ $(function() {
     document.title = T.title(m);
     $('.title').text(T.title(m));
 
-    cInputTape.placeholder(L.texts.tape, 'placeholder-active');
-    cInputProgram.placeholder(L.texts.program, 'placeholder-active');
+    cInputTape.attr('placeholder', L.texts.tape);
+    cInputProgram.attr('placeholder', L.texts.program);
 
     $('#btn-help').attr('href', T.helpURL(m));
 
