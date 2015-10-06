@@ -1,24 +1,20 @@
-$(document).ready(function() {
-    //проверяем на доступность
-     if (('localStorage' in window) && window.localStorage !== null){
-         
-         if(localStorage.getItem("jstu4-lastsave")==null){
-             localStorage.setItem("jstu4-lastsave", "");
-         }
-         
-    var lastsave = localStorage.getItem("jstu4-lastsave");
-    var newsave = lastsave;
-    //Загружаем в textarea программу из localstorage
-    $('#input-program').val(lastsave);
-    
-    
-    $('#input-program').keyup(function(){
-        newsave = $('#input-program').val();
-        //было ли изменение?
-        if(newsave!=lastsave){
-           localStorage.setItem("jstu4-lastsave", newsave);
-           lastsave=newsave;
+$(function() {
+    if (!('localStorage' in window) || window.localStorage == null) {
+        return;
+    }
+
+    var key = 'jstu4-lastsave',
+        input = $('#input-program'),
+        lastsave = localStorage.getItem(key) || '';
+
+    input.val(lastsave);
+
+    input.keyup(function() {
+        var newsave = input.val();
+
+        if (newsave != lastsave) {
+            localStorage.setItem(key, newsave);
+            lastsave = newsave;
         }
     });
-     }
 });
