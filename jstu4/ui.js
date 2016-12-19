@@ -142,7 +142,6 @@ log = function(text, isError) {
 
 doChangeLanguage = function() {
     var currentLanguage;
-    console.log(L.lang);
     if(L.lang == 'ru'){
         currentLanguage = 'en';
     } else{
