@@ -140,6 +140,16 @@ log = function(text, isError) {
     cLog.html(text || '');
 },
 
+doChangeLanguage = function() {
+    var currentLanguage;
+    if(L.lang == 'ru'){
+        currentLanguage = 'en';
+    } else{
+        currentLanguage = 'ru';
+    }
+    window.location = "jstu4.html?lang=" + currentLanguage;
+},
+
 doCompile = function() {
     var text = cInputProgram.val(),
         htmlParts = [],
@@ -400,6 +410,9 @@ for(var k in L.templates) {
 T.$addTemplate('helpURL', 'help-{{lang}}.html');
 
 $(function() {
+    // display current language
+    $('#btn-change-language').text(L.lang);
+
     cDisplayProgram = $('#display-program');
     cInputProgram = $('#input-program');
     cDisplayTape = $('#display-tape');
@@ -433,6 +446,11 @@ $(function() {
     // bind events
 
     $(window).resize(deferredResizeProgramBlocks);
+
+    $('#btn-change-language').click(function() {
+        doChangeLanguage();
+        return false;
+    });
 
     $('#btn-start').click(function() {
         doStart();
